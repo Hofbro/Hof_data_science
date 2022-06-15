@@ -1,48 +1,59 @@
+"""Game guess number
+computer guesses the number itself"""
+
 import numpy as np
-def guess_number(number):
 
-n = 101
-predict_number = n//2
-count = 0
-low_limit = 1
-high_limit = n
+def guess_number(number) -> int:
+    """Computer guesses the number
 
-while True:
-    count+=1 
-    
-    if predict_number > number:
-        high_limit -= (high_limit-low_limit)//2
-        predict_number = (high_limit+low_limit)//2
+    Args:
+        number (int): Random number from 1 to 100
+
+    Returns:
+        int: Number of attempts
+    """
+
+    predict_number = 50 # First prediction
+    lower_limit = 1
+    upper_limit = 101
+    count = 0 # Number of attempts
+
+    while True:
+        count+=1 
         
-    elif predict_number < number:
-        low_limit += (high_limit-low_limit)//2
-        predict_number = (high_limit+low_limit)//2
+        if predict_number > number:
+            upper_limit = upper_limit -(upper_limit-lower_limit)//2 # Reducing the upper limit
+            predict_number = (upper_limit+lower_limit)//2
+            
+        elif predict_number < number:
+            lower_limit = lower_limit + (upper_limit-lower_limit)//2 # Reducing the lower limit
+            predict_number = (upper_limit+lower_limit)//2
 
-    else:
-        break #End game
-    
+        else:
+            break #End game
+        
     return count
 
-def score_game(random_predict) -> int:
+def score_game(guess_number) -> int:
     """Average attempts meeter
 
     Args:
-        random_predict (_type_): prediction function
+        guess_number (func): Guessing function
 
     Returns:
-        int: average attempts
+        int: Average attempts
     """
     count_ls = []
-    np.random.seed(1)    # фиксируем сид для воспроизводимости
-    random_array = np.random.randint(1,101, size=(1000))   # загадали список чисел
+    np.random.seed(1)    # fixing seed for reproducibility
+    random_array = np.random.randint(1,101, size=(1000))   # Setting array of numbers and number of repeats
     
     for number in random_array:
-        count_ls.append(random_predict(number))
+        count_ls.append(guess_number(number))
     
     score = int(np.mean(count_ls))
-    print(f'Your algorithm average win predictions is: {score} attempts')
+    print(f'Your algorithm average win guessing is: {score} attempts')
     return score
 
 if __name__ == '__main__':
     #  RUN
-    score_game(random_predict)
+    score_game(guess_number)
