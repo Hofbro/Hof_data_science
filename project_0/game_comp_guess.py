@@ -1,5 +1,5 @@
-"""Game guess number
-computer guesses the number itself"""
+"""Game "Guess number"
+computer is able to guess the number by itself"""
 
 import numpy as np
 
@@ -22,11 +22,11 @@ def guess_number(number) -> int:
         count+=1 
         
         if predict_number > number:
-            upper_limit = upper_limit -(upper_limit-lower_limit)//2 # Reducing the upper limit
+            upper_limit = upper_limit -(upper_limit-lower_limit)//2 # Reducing the upper range limit
             predict_number = (upper_limit+lower_limit)//2
             
         elif predict_number < number:
-            lower_limit = lower_limit + (upper_limit-lower_limit)//2 # Reducing the lower limit
+            lower_limit = lower_limit + (upper_limit-lower_limit)//2 # Reducing the lower range limit
             predict_number = (upper_limit+lower_limit)//2
 
         else:
@@ -35,7 +35,7 @@ def guess_number(number) -> int:
     return count
 
 def score_game(guess_number) -> int:
-    """Average attempts meeter
+    """Average attempts meter
 
     Args:
         guess_number (func): Guessing function
@@ -51,7 +51,7 @@ def score_game(guess_number) -> int:
         count_ls.append(guess_number(number))
     
     score = int(np.mean(count_ls))
-    print(f'Your algorithm average win guessing is: {score} attempts')
+    print(f'Your algorithm average correct guessing is: {score} attempts')
     return score
 
 if __name__ == '__main__':
