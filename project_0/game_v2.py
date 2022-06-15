@@ -1,5 +1,5 @@
-"""Game guess a number
-done by comp
+"""Game: Guess a number
+done by computer
 """
 
 import numpy as np
@@ -11,7 +11,7 @@ def random_predict(number:int=1) -> int:
         number (int, optional): Predicted number. Defaults to 1.
 
     Returns:
-        int: Attempts
+        int: Number of attempts
     """
     count = 0
     
@@ -27,7 +27,7 @@ def score_game(random_predict) -> int:
     """Average attempts meeter
 
     Args:
-        randome_predict (_type_): prediction function
+        random_predict (_type_): prediction function
 
     Returns:
         int: average attempts
@@ -46,6 +46,3 @@ def score_game(random_predict) -> int:
 if __name__ == '__main__':
     #  RUN
     score_game(random_predict)
-    
-    
-    
